@@ -11,16 +11,18 @@ const helpers = require('./utils/helpers');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+// Session set-up
 const sess = {
-  secret: 'Super secret secret',
+  // This should be stored  in ".env"
+  secret: process.env.SESSION_SECRET,
   cookie: {},
-  resave: false,
-  saveUninitialized: true,
+  resave: false, 
+  saveUninitialized: false,
   store: new SequelizeStore({
     db: sequelize,
   }),
 };
-
+// Creates the session
 app.use(session(sess));
 
 const hbs = exphbs.create({ helpers });
