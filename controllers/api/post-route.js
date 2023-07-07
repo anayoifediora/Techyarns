@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Post } = require('../../models');
+const { Post, User } = require('../../models');
 
 //CREATE a post
 router.post('/', async (req, res) => {
@@ -23,7 +23,6 @@ router.delete('/:id', async (req, res) => {
         const postData = await Post.destroy({
             where: {
                 id: req.params.id,
-                user_id: req.session.user_id,
             },
         });
         
@@ -55,5 +54,28 @@ router.put('/:id', async (req, res) => {
       }
 })
 
+// GET request for a single post (Should get single post by clicking on post on homepage)
+
+router.get('/:id', async (req, res) => {
+    try {
+        const postData = await Post.findByPk(req.params.id, {
+            include: [
+                {
+                    model: User,
+                    attributes: ['username']
+                },
+            ],
+        });
+
+        if (!postData) {
+            res.status(404).json({ message: 'No post found with this id!'});
+            return;
+        }
+        res.status(200).json(postData);
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
+})
 module.exports = router;
 

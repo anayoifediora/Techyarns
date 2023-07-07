@@ -12,6 +12,7 @@ router.get('/', async (req, res) => {
                 }
             ]
         })
+        // res.status(200).json(dbPostData)
         const homePosts = dbPostData.map((homePost) => 
         homePost.get({ plain: true }));
 
