@@ -5,7 +5,12 @@ const { Post, User, Comments } = require('../models');
 router.get('/', async (req, res) => {
     try {
         const dbPostData = await Post.findAll({
-            attributes: ['title'],
+            include: [
+                {
+                model: User,
+                attributes: ['username'],
+                }
+            ]
         })
         const homePosts = dbPostData.map((homePost) => 
         homePost.get({ plain: true }));
@@ -18,3 +23,5 @@ router.get('/', async (req, res) => {
         res.status(500).json(err)
     }
 });
+
+module.exports = router;
