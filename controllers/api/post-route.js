@@ -71,7 +71,13 @@ router.get('/:id', async (req, res) => {
             res.status(404).json({ message: 'No post found with this id!'});
             return;
         }
-        res.status(200).json(postData);
+        const singlePostData = postData.map((singlePost) => 
+        singlePost.get({ plain: true }));
+        console.log(singlePostData)
+        res.render('fullposts', {
+            singlePostData, loggedIn: req.session.loggedIn,        
+        });
+        // res.status(200).json(postData);
     } catch (err) {
         console.log(err);
         res.status(500).json(err);
