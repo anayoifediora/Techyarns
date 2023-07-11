@@ -27,3 +27,11 @@ h1 {
 .btn {
     background-color: var(--primary);
 }
+.login-form, .signup-form {
+ border-color: var(--primary);
+}
+
+.form-control {
+    padding:10px;
+    border-color:var(--primary)
+}

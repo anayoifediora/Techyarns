@@ -14,7 +14,7 @@
         <header>
             <h1>Techyarns</h1>
             <ul class="nav nav-pills">
-                {{#if logged_in}}
+                {{!-- {{#if logged_in}} --}}
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="/">Home</a>
                 </li>
@@ -24,14 +24,11 @@
                 <li class="nav-item">
                     <a class="nav-link" id= "logout" href="#">Logout</a>
                 </li>
-                {{else}}
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/">Home</a>
-                </li>
+                {{!-- {{else}} --}}
                 <li class="nav-item">
                     <a class="nav-link" href ="/login">Login</a>
                 </li>
-                {{/if}}
+                {{!-- {{/if}} --}}
             </ul>
 
         </header>
