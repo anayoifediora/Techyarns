@@ -1,8 +1,8 @@
 const submitPost = async (event) => {
     event.preventDefault();
   
-    let formTitle = document.getElementById('title').value.trim()
-    let formDescription = document.getElementById('description').value.trim()
+    let formTitle = document.getElementById('exampleFormControlInput1').value.trim()
+    let formDescription = document.getElementById('exampleFormControlTextarea1').value.trim()
   
   
     const card = document.createElement('div');
@@ -18,7 +18,7 @@ const submitPost = async (event) => {
     cardTitle.setAttribute('class', 'card-title')
     cardText.setAttribute('class', 'card-text')
     cardBody.setAttribute('class', 'card-body');
-    readMore.setAttribute('href', `/posts/${{id}}`);
+    readMore.setAttribute('href', '/posts/:id');
   
     postContainer.appendChild(card);
     card.appendChild(cardBody, cardHeader);
@@ -43,6 +43,5 @@ const submitPost = async (event) => {
     }
   };
   
-  document.querySelector('.post-form').addEventListener('submit', submitPost);
-  
+  document.getElementById('post-submit-button').addEventListener('click', submitPost);
   
