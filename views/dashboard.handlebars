@@ -1,9 +1,6 @@
 
 <div class="row">
-    {{#each dashBoardData as |dashboard|}}
-    {{> userposts}}
-    {{/each}}
-
+    
 
     <div class="col" style="display:flex; flex-direction:column; border-radius:5px;" >
         <button type="button" class="btn btn-primary btn-lg" id="newpost" style="width:200px;">Create New Post</button>
@@ -20,6 +17,11 @@
             
         </div>
     </div>
+    <div class="col">
+        {{#each dashBoardData as |dashboard|}}
+        {{> userposts}}
+        {{/each}}
+    </div>
 </div>
 <script>
     const newPostButton = document.getElementById('newpost');
@@ -30,3 +32,5 @@
     }
     newPostButton.addEventListener('click', openPostForm)
 </script>
+
+<script src="./js/newPost.js"></script>

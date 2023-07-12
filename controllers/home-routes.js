@@ -63,15 +63,22 @@ router.get('/posts/:id', async (req, res) => {
 
 router.get('/dashboard', async (req, res) => {
     try {
-        const dashBoardData = await Post.findAll({
-            where: {user_id: 2},
+        const dashData = await Post.findAll({
+            include: [
+                {
+                model: User,
+                attributes: ['username'],
+                }
+            ]
             
         });
 
-        if (!dashBoardData) {
+        if (!dashData) {
             res.status(404).json({ message: 'No user found with this id!'});
             return;
         }
+        const dashBoardData = dashData.map((item) => 
+        item.get({ plain: true }));
         console.log(dashBoardData)
         res.render('dashboard', {
             dashBoardData, loggedIn: req.session.loggedIn
@@ -81,5 +88,6 @@ router.get('/dashboard', async (req, res) => {
         res.status(500).json(err);
     }
 })
+
 
 module.exports = router;
