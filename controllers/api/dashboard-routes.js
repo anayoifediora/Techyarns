@@ -6,13 +6,9 @@ const { Comments, Post, User } = require('../../models');
 
 router.get('/', async (req, res) => {
     try {
-        const dashBoardData = await User.findByPk(req.params.id, {
-            include: [
-                {
-                    model: Post
-                    
-                },
-            ],
+        const dashBoardData = await Post.findAll({
+            where: {user_id: 2},
+            
         });
 
         if (!dashBoardData) {

@@ -1,11 +1,15 @@
 <div class="card">
   <div class="card-header">
-    {{dataValues.createdAt}}
+    {{singlePost.createdAt}}
   </div>
   <div class="card-body">
-    <h5 class="card-title">{{dataValues.title}}</h5>
-    <p class="card-text">Author:{{dataValues.user}} </p>
-    <p class="card-text">{{dataValues.description}} </p>
+    <h5 class="card-title">{{singlePost.title}}</h5>
+    <p class="card-text">Author:{{singlePost.user}} </p>
+    <p class="card-text">{{singlePost.description}} </p>
     <a href="/posts/{{id}}" class="btn btn-primary">Comments</a>
   </div>
 </div>
+
+{{#if loggedIn}}
+<script src= './js/logout.js'></script>
+{{/if}}

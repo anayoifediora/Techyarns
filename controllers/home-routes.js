@@ -49,11 +49,33 @@ router.get('/posts/:id', async (req, res) => {
             res.status(404).json({ message: 'No post found with this id!'});
             return;
         }
-        console.log(postData)
+        const singlePost = postData.get({ plain: true});
+        console.log(singlePost)
         res.render('fullposts', {
-            postData, loggedIn: req.session.loggedIn,        
+            singlePost, loggedIn: req.session.loggedIn,        
         });
         // res.status(200).json(postData);
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
+})
+
+router.get('/dashboard', async (req, res) => {
+    try {
+        const dashBoardData = await Post.findAll({
+            where: {user_id: 2},
+            
+        });
+
+        if (!dashBoardData) {
+            res.status(404).json({ message: 'No user found with this id!'});
+            return;
+        }
+        console.log(dashBoardData)
+        res.render('dashboard', {
+            dashBoardData, loggedIn: req.session.loggedIn
+        });
     } catch (err) {
         console.log(err);
         res.status(500).json(err);

@@ -1,0 +1,32 @@
+
+<div class="row">
+    {{#each dashBoardData as |dashboard|}}
+    {{> userposts}}
+    {{/each}}
+
+
+    <div class="col" style="display:flex; flex-direction:column; border-radius:5px;" >
+        <button type="button" class="btn btn-primary btn-lg" id="newpost" style="width:200px;">Create New Post</button>
+        <div class="post-form">
+            <div class="mb-3">
+            <label class="form-label" id="post-form-title">Title</label>
+            <input class="form-control" id="exampleFormControlInput1" style="margin:5px; width:-webkit-fill-available; border-radius:0px;">
+            </div>
+            <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label" id="post-form-description">Description</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" style="margin:5px; width:-webkit-fill-available; border-radius:0px;"></textarea>
+            </div>
+            <button type="button" class="btn btn-primary" id="post-submit-button">Submit</button>
+            
+        </div>
+    </div>
+</div>
+<script>
+    const newPostButton = document.getElementById('newpost');
+
+    const openPostForm = () => {
+        const postForm = document.querySelector('.post-form');
+        postForm.setAttribute('style', "display:block; width: 600px; height:300px; margin-top:20px;");
+    }
+    newPostButton.addEventListener('click', openPostForm)
+</script>

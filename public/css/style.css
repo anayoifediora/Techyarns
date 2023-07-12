@@ -35,3 +35,18 @@ h1 {
     padding:10px;
     border-color:var(--primary)
 }
+
+.post-form{
+    display: none;
+    background-color: var(--primary);
+}
+#post-form-title, #post-form-description {
+    font-size: 20px;
+    color:white;
+    margin-left: 5px;
+}
+#post-submit-button {
+    background-color:beige;
+    border: 1px, dashed, black;
+    color:var(--primary);
+}
