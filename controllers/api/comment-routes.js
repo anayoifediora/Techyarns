@@ -5,7 +5,9 @@ const { Comments, Post, User } = require('../../models');
 router.post('/', async (req, res) => {
     try {
         const dbCommentData = await Comments.create({
+            post_id: req.body.post_id,
             description: req.body.description,
+            user_id: req.session.user_id,
         });
         req.session.save(() => {
             req.session.loggedIn = true;

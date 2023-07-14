@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Post, User, Comments } = require('../models');
+const { Post, User, Comments, } = require('../models');
 
 //GET all posts for the homepage
 router.get('/', async (req, res) => {
@@ -17,7 +17,7 @@ router.get('/', async (req, res) => {
         homePost.get({ plain: true }));
         // console.log(homePosts)
         res.render('homepage', {
-            homePosts, loggedIn: req.session.loggedIn,
+            homePosts, loggedIn: req.session.loggedIn, userId: req.session.user_id
         });
     } catch (err) {
         console.log(err);
@@ -52,7 +52,7 @@ router.get('/posts/:id', async (req, res) => {
         const singlePost = postData.get({ plain: true});
         console.log(singlePost)
         res.render('fullposts', {
-            singlePost, loggedIn: req.session.loggedIn,        
+            singlePost, loggedIn: req.session.loggedIn, userId: req.session.user_id     
         });
         // res.status(200).json(postData);
     } catch (err) {
@@ -62,14 +62,11 @@ router.get('/posts/:id', async (req, res) => {
 })
 
 router.get('/dashboard', async (req, res) => {
+    console.log(req.session)
     try {
         const dashData = await Post.findAll({
-            include: [
-                {
-                model: User,
-                attributes: ['username'],
-                }
-            ]
+            where: { user_id: req.session.user_id },
+            include: [{ model: User,}]
             
         });
 
@@ -81,7 +78,7 @@ router.get('/dashboard', async (req, res) => {
         item.get({ plain: true }));
         console.log(dashBoardData)
         res.render('dashboard', {
-            dashBoardData, loggedIn: req.session.loggedIn
+            dashBoardData, loggedIn: req.session.loggedIn, userId: req.session.user_id
         });
     } catch (err) {
         console.log(err);
