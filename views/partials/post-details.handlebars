@@ -1,13 +1,13 @@
 <div class="card">
   <div class="card-header">
-    {{createdAt}}
+    {{format_date createdAt}}
   </div>
   <div class="card-body">
     <h5 class="card-title">{{title}}</h5>
     <p class="card-text">Author: {{user.username}}</p>
     <a href="/posts/{{id}}" class="btn btn-primary">Read more..</a>
-    {{#if userId}}
+    {{!-- {{#if userId}}
     <button class="btn btn-primary">Update</button>
-    {{/if}}
+    {{/if}} --}}
   </div>
 </div>

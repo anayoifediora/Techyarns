@@ -86,5 +86,28 @@ router.get('/dashboard', async (req, res) => {
     }
 })
 
+router.get('/comments', async (req, res) => {
+    try {
+        // finds all comments associated with a post
+        const dbCommentData = await Comments.findAll({
+            where: { post_id: req.body.post_id },
+            include: [{ model: Post }]
+        });
+        if (!dbCommentData) {
+            res.status(404).json({ message: 'No comment found'});
+            return;
+        }
+        console.log(dbCommentData)
+        // const dashBoardData = dashData.map((item) => 
+        // item.get({ plain: true }));
+        // console.log(dashBoardData)
+        res.render('fullposts', {
+            dbCommentData, loggedIn: req.session.loggedIn, userId: req.session.user_id
+        });
 
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
+});
 module.exports = router;

@@ -1,15 +1,35 @@
 <div class="card">
   <div class="card-header">
-    {{singlePost.createdAt}}
+    {{format_date singlePost.createdAt}}
   </div>
   <div class="card-body">
     <h5 class="card-title">{{singlePost.title}}</h5>
-    <p class="card-text">Author:{{singlePost.user.username}} </p>
+    <p class="card-text">Author: {{singlePost.user.username}} </p>
     <p class="card-text">{{singlePost.description}} </p>
-    <a href="/posts/{{id}}" class="btn btn-primary">Comments</a>
+    {{!-- <a href="/posts/{{id}}" class="btn btn-primary" id ="comment-btn">Comments</a> --}}
+    <button class="btn btn-primary" id ="comment-btn">Comments</button>
+  </div>
+</div>
+<div style="width:1200px; background-color:var(--primary); padding:15px; border-radius:5px;">
+  <div class="form-floating">
+    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+    <label for="floatingTextarea"></label>
+    <button class="btn btn-primary" id ="comment-btn" style="margin-top:5px; color:var(--primary); background-color:white;">Post comment</button>
   </div>
 </div>
 
 {{#if loggedIn}}
 <script src= './js/logout.js'></script>
 {{/if}}
+
+  {{!-- <script>
+    const commentButton = document.getElementById('comment-btn');
+
+    const openCommentForm = () => {
+        const commentModal = document.querySelector(post-form');
+        postForm.setAttribute('style', "display:block; width: 600px; height:300px; margin-top:20px;");
+    }
+    commentButton.addEventListener('click', openCommentForm)
+</script> --}}
+
+<script src="./js/postComments.js"></script>
