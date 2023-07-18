@@ -1,36 +1,36 @@
-const submitPost = async (event) => {
+const submitComment = async (event) => {
     event.preventDefault();
   
-    let formTitle = document.getElementById('exampleFormControlInput1').value.trim()
-    let formDescription = document.getElementById('exampleFormControlTextarea1').value.trim()
+    let commentDescription = document.querySelector('.comments')
+    
   
   
     const card = document.createElement('div');
     const cardHeader = document.createElement('div');
     const cardBody = document.createElement('div');
-    const cardTitle = document.createElement('h5');
-    const cardText = document.createElement('p');
-    const readMore = document.createElement('a');
+    const cardBlockquote = document.createElement('blockquote');
+    const commentText = document.createElement('p');
+    const commentFooter = document.createElement('footer');
     
-    const postContainer = document.querySelector('.row')
-    card.setAttribute('style', 'width:600px')
+    
+    
+    // const postContainer = document.querySelector('.row')
+    card.setAttribute('class', 'card')
     cardHeader.setAttribute('class', 'card-header')
-    cardTitle.setAttribute('class', 'card-title')
-    cardText.setAttribute('class', 'card-text')
     cardBody.setAttribute('class', 'card-body');
-    readMore.setAttribute('href', '/posts/:id');
+    cardBlockquote.setAttribute('class', 'blockquote mb-0');
+    commentText.setAttribute('class', 'card-text');
+    commentFooter.setAttribute('class', 'blockquote-footer');
   
     postContainer.appendChild(card);
-    card.appendChild(cardBody, cardHeader);
-    cardBody.appendChild(cardTitle, cardText, readMore);
-  
-  
+    card.appendChild(cardHeader, cardBody);
+    cardBody.appendChild(cardBlockquote);
+    cardBlockquote.appendChild(commentText, commentFooter)
     const data = {
-      title: formTitle,
-      description: formDescription,
+      description: commentDescription,
     }
     
-    const response = await fetch('/api/posts', {
+    const response = await fetch('/api/comments', {
       method: 'POST',
       body: JSON.stringify(data),
       headers: { 'Content-Type': 'application/json' },
@@ -43,5 +43,5 @@ const submitPost = async (event) => {
     }
   };
   
-  document.getElementById('post-submit-button').addEventListener('click', submitPost);
+  document.getElementById('comment-btn').addEventListener('click', submitComment);
   

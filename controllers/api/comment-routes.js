@@ -9,6 +9,7 @@ router.post('/', async (req, res) => {
             description: req.body.description,
             user_id: req.session.user_id,
         });
+        
         req.session.save(() => {
             req.session.loggedIn = true;
             res.status(200).json(dbCommentData);
