@@ -1,35 +1,40 @@
-<div class="card">
-  <div class="card-header">
-    {{format_date singlePost.createdAt}}
-  </div>
-  <div class="card-body">
-    <h5 class="card-title">{{singlePost.title}}</h5>
-    <p class="card-text">Posted by: {{singlePost.user.username}} </p>
-    <p class="card-text">{{singlePost.description}} </p>
-    {{!-- <a href="/posts/{{id}}" class="btn btn-primary" id ="comment-btn">Comments</a> --}}
-    <button class="btn btn-primary" id ="comment-btn">Comments</button>
-  </div>
+<div class="col">   
+    <div class="card">
+      <div class="card-header">
+        {{format_date singlePost.createdAt}}
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">{{singlePost.title}}</h5>
+        <p class="card-text">Posted by: {{singlePost.user.username}} </p>
+        <p class="card-text">{{singlePost.description}} </p>
+        {{!-- <a href="/posts/{{id}}" class="btn btn-primary" id ="comment-btn">Comments</a> --}}
+        <button class="btn btn-primary" id ="comment-btn">Comments</button>
+        <button class="btn btn-primary" id ="delete-btn">Delete</button>
+      </div>
+    </div>
+    <div class="comment-form"style=" display:none;">
+      <div class="form-floating">
+        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+        <label for="floatingTextarea" class="comments"></label>
+        <button class="btn btn-primary" id ="comment-button" style="margin-top:5px; color:var(--primary); background-color:white;">Post comment</button>
+      </div>
+    </div>
+    {{#each singlePost.comments}}
+    <div class="card">
+      <div class="card-header">
+        {{format_date this.createdAt}}
+      </div>
+      <div class="card-body">
+        <blockquote class="blockquote mb-0">
+          <p class="card-text">{{this.description}}</p>
+          <footer class="blockquote-footer">{{this.user_id}}</footer>
+        </blockquote>
+      </div>
+    </div>
+    {{/each}}
 </div>
-<div class="comment-form"style=" display:none;">
-  <div class="form-floating">
-    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
-    <label for="floatingTextarea" class="comments"></label>
-    <button class="btn btn-primary" id ="comment-btn" style="margin-top:5px; color:var(--primary); background-color:white;">Post comment</button>
-  </div>
-</div>
-{{#each commentData as |comment|}}
-<div class="card">
-  <div class="card-header">
-    Quote
-  </div>
-  <div class="card-body">
-    <blockquote class="blockquote mb-0">
-      <p class="card-text">A well-known quote, contained in a blockquote element.</p>
-      <footer class="blockquote-footer">Someone famous in </footer>
-    </blockquote>
-  </div>
-</div>
-{{/each}}
+
+
 
 <script>
   const commentButton = document.getElementById('comment-btn');
@@ -39,13 +44,11 @@
       commentForm.setAttribute('style', "display:block; width:1200px; background-color:var(--primary); padding:10px; border-radius:5px;");
   }
   commentButton.addEventListener('click', openCommentForm)
-</script>
 
-<script>
-  const submitComment = async (event) => {
+const submitComment = async (event) => {
     event.preventDefault();
   
-    let commentDescription = document.querySelector('.comments')
+    let commentDescription = document.querySelector('floatingTextarea')
     
   
   
@@ -58,7 +61,7 @@
     
     
     
-    // const postContainer = document.querySelector('.row')
+    const postContainer = document.querySelector('.col')
     card.setAttribute('class', 'card')
     cardHeader.setAttribute('class', 'card-header')
     cardBody.setAttribute('class', 'card-body');
@@ -66,11 +69,11 @@
     commentText.setAttribute('class', 'card-text');
     commentFooter.setAttribute('class', 'blockquote-footer');
   
-    // postContainer.appendChild(card);
-    // card.appendChild(cardBody, cardHeader);
-    // cardBody.appendChild(cardTitle, cardText, readMore);
-  
-  
+    postContainer.appendChild(card);
+    card.appendChild(cardHeader, cardBody);
+    cardBody.appendChild(cardBlockquote);
+    cardBlockquote.appendChild(commentText, commentFooter)
+
     const data = {
       description: commentDescription,
     }
@@ -87,11 +90,41 @@
       console.log('Error:', response.status);
     }
   };
+
+  const deletePost = async (event) => {
+
+    const response = await fetch('/posts/id', {
+      method: 'DELETE',
+    });
+    if (response.ok) {
+      document.location.replace('/dashboard');
+    } else {
+      alert('Failed to delete post')
+    }
+  };
   
-  document.getElementById('comment-btn').addEventListener('click', submitComment);
-  
+  document.getElementById('comment-button').addEventListener('click', submitComment);
+  document.getElementById('delete-btn').addEventListener('click', deletePost);
+
+
 </script>
 
-{{!-- {{#if loggedIn}}
-<script src= './js/logout.js'></script>
-{{/if}} --}}
+{{#if loggedIn}}
+<script>
+  const logout = async () => {
+    const response = await fetch('/api/users/logout', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+    });
+  
+    if (response.ok) {
+      document.location.replace('/');
+    } else {
+      alert('Failed to log out.');
+    }
+  };
+  
+  document.querySelector('#logout').addEventListener('click', logout);
+  
+</script>
+{{/if}}

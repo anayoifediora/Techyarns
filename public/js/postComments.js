@@ -1,7 +1,15 @@
+const commentButton = document.getElementById('comment-btn');
+
+  const openCommentForm = () => {
+      const commentForm = document.querySelector('.comment-form');
+      commentForm.setAttribute('style', "display:block; width:1200px; background-color:var(--primary); padding:10px; border-radius:5px;");
+  }
+  commentButton.addEventListener('click', openCommentForm)
+
 const submitComment = async (event) => {
     event.preventDefault();
   
-    let commentDescription = document.querySelector('.comments')
+    let commentDescription = document.querySelector('floatingTextarea')
     
   
   
@@ -14,7 +22,7 @@ const submitComment = async (event) => {
     
     
     
-    // const postContainer = document.querySelector('.row')
+    const postContainer = document.querySelector('.col')
     card.setAttribute('class', 'card')
     cardHeader.setAttribute('class', 'card-header')
     cardBody.setAttribute('class', 'card-body');
@@ -26,6 +34,7 @@ const submitComment = async (event) => {
     card.appendChild(cardHeader, cardBody);
     cardBody.appendChild(cardBlockquote);
     cardBlockquote.appendChild(commentText, commentFooter)
+
     const data = {
       description: commentDescription,
     }
@@ -42,6 +51,19 @@ const submitComment = async (event) => {
       console.log('Error:', response.status);
     }
   };
+
+  const deletePost = async (event) => {
+
+    const response = await fetch('/posts/id', {
+      method: 'DELETE',
+    });
+    if (response.ok) {
+      document.location.replace('/dashboard');
+    } else {
+      alert('Failed to delete post')
+    }
+  };
   
-  document.getElementById('comment-btn').addEventListener('click', submitComment);
-  
+  document.getElementById('comment-button').addEventListener('click', submitComment);
+  document.getElementById('delete-btn').addEventListener('click', deletePost);
+

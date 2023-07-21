@@ -38,10 +38,12 @@ router.get('/posts/:id', async (req, res) => {
     try {
         const postData = await Post.findByPk(req.params.id, {
             include: [
-                {
-                    model: User,
+                { model: User,
                     attributes: ['username']
                 },
+                {
+                    model: Comments
+                }
             ],
         });
 
@@ -91,7 +93,7 @@ router.get('/posts/:id', async (req, res) => {
         // finds all comments associated with a post
         
         const dbCommentData = await Post.findByPk(req.params.id, {
-            include: [{ model: Comments }]
+            include: [{ model: Comments }, { model: User }]
         });
         if (!dbCommentData) {
             res.status(404).json({ message: 'No comment found'});

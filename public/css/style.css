@@ -2,8 +2,14 @@
     --primary: rgb(16, 45, 119);
 
 }
+
 body {
     background-color:rgb(221, 216, 211);
+    font-family: 'Ysabeau Office', sans-serif;
+    font-size: larger;
+}
+h2 {
+    margin-top:10px;
 }
 .nav {
     margin:20px;
@@ -15,12 +21,13 @@ h1 {
     color: white;
     padding:15px;
     margin:0px, 10px, 0px, 10px;
+    font-size: 60px;
 }
 main {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    /* align-items: center; */
+    align-items: center;
     
 }
 .card {
@@ -40,11 +47,24 @@ main {
 }
 .login-form, .signup-form {
  border-color: var(--primary);
+ border-style:groove;
+ background-color: white;
+ width:600px;
+}
+
+.form-label {
+    color: black;
+    font-size: 20px;
+    margin-left: 10px;
+    margin-top: 5px;
 }
 
 .form-control {
     padding:10px;
-    border-color:var(--primary)
+    margin:10px;
+    width: 580px;
+    border-color:var(--primary);
+    border-width:1.5px;
 }
 
 .post-form{
@@ -62,3 +82,19 @@ main {
     border: 1px, dashed, black;
     color:var(--primary);
 }
+/* .contact {
+    display:flex;
+    align-items:center;
+    background-color: var(--primary);
+}
+.contact-details {
+    display:flex;
+    flex-wrap:nowrap;
+    justify-content:space-between;
+    color: white
+}
+    
+.contact h2 {
+    padding:30px;
+    color: white;
+} */

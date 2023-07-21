@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Post, User } = require('../../models');
+const { Post, User, Comments } = require('../../models');
 
 //CREATE a post
 router.post('/', async (req, res) => {
@@ -61,10 +61,12 @@ router.get('/:id', async (req, res) => {
     try {
         const postData = await Post.findByPk(req.params.id, {
             include: [
-                {
-                    model: User,
+                { model: User,
                     attributes: ['username']
                 },
+                {
+                    model: Comments
+                }
             ],
         });
 
