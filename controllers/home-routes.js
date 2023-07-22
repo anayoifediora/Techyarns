@@ -93,6 +93,7 @@ router.get('/posts/:id', async (req, res) => {
         // finds all comments associated with a post
         
         const dbCommentData = await Post.findByPk(req.params.id, {
+        
             include: [{ model: Comments }, { model: User }]
         });
         if (!dbCommentData) {

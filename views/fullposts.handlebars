@@ -91,11 +91,13 @@ const submitComment = async (event) => {
     }
   };
 
-  const deletePost = async (event) => {
+  const deletePost = async () => {
+      let postId = window.location.href.split('/').pop();
 
-    const response = await fetch('/posts/id', {
+    const response = await fetch(`/api/posts/${postId}`, {
       method: 'DELETE',
     });
+    console.log(postId)
     if (response.ok) {
       document.location.replace('/dashboard');
     } else {
