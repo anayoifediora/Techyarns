@@ -43,5 +43,6 @@ const submitPost = async (event) => {
     }
   };
   
+  
   document.getElementById('post-submit-button').addEventListener('click', submitPost);
   

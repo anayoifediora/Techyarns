@@ -1,18 +1,23 @@
 const commentButton = document.getElementById('comment-btn');
+const cancelButton = document.getElementById('cancel-button');
 
   const openCommentForm = () => {
       const commentForm = document.querySelector('.comment-form');
       commentForm.setAttribute('style', "display:block; width:1200px; background-color:var(--primary); padding:10px; border-radius:5px;");
   }
+  const closeCommentForm = () => {
+    const commentForm = document.querySelector('.comment-form');
+    commentForm.setAttribute('style', "display:none;");
+  }
   commentButton.addEventListener('click', openCommentForm)
+  cancelButton.addEventListener('click', closeCommentForm)
 
 const submitComment = async (event) => {
     event.preventDefault();
-  
-    let commentDescription = document.querySelector('floatingTextarea')
+
     
-  
-  
+    const commentDescription = document.getElementById('floatingTextarea').value.trim();
+    console.log(commentDescription);
     const card = document.createElement('div');
     const cardHeader = document.createElement('div');
     const cardBody = document.createElement('div');
@@ -45,6 +50,7 @@ const submitComment = async (event) => {
       headers: { 'Content-Type': 'application/json' },
     });
     console.log(response)
+      
     if (response.ok) {
         document.location.replace(window.location.href);
     } else {
@@ -68,4 +74,3 @@ const submitComment = async (event) => {
   
   document.getElementById('comment-button').addEventListener('click', submitComment);
   document.getElementById('delete-btn').addEventListener('click', deletePost);
-

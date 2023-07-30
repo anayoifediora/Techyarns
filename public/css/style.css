@@ -6,7 +6,7 @@
 body {
     background-color:rgb(221, 216, 211);
     font-family: 'Ysabeau Office', sans-serif;
-    font-size: larger;
+    font-size: 23px;
 }
 h2 {
     margin-top:10px;
@@ -77,8 +77,9 @@ main {
     margin-left: 5px;
     
 }
-#post-submit-button {
-    background-color:beige;
+#post-submit-button, #post-cancel-button {
+    background-color:rgb(221, 216, 211);
+    font-weight: bold;
     border: 1px, dashed, black;
     color:var(--primary);
 }

@@ -17,6 +17,7 @@
         <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
         <label for="floatingTextarea" class="comments"></label>
         <button class="btn btn-primary" id ="comment-button" style="margin-top:5px; color:var(--primary); background-color:white;">Post comment</button>
+        <button class="btn btn-primary" id ="cancel-button" style="margin-top:5px; color:var(--primary); background-color:white;">Cancel</button>
       </div>
     </div>
     {{#each singlePost.comments}}
@@ -38,20 +39,25 @@
 
 <script>
   const commentButton = document.getElementById('comment-btn');
+  const cancelButton = document.getElementById('cancel-button');
 
   const openCommentForm = () => {
       const commentForm = document.querySelector('.comment-form');
       commentForm.setAttribute('style', "display:block; width:1200px; background-color:var(--primary); padding:10px; border-radius:5px;");
   }
+  const closeCommentForm = () => {
+    const commentForm = document.querySelector('.comment-form');
+    commentForm.setAttribute('style', "display:none;");
+  }
   commentButton.addEventListener('click', openCommentForm)
+  cancelButton.addEventListener('click', closeCommentForm)
 
 const submitComment = async (event) => {
     event.preventDefault();
-  
-    let commentDescription = document.querySelector('floatingTextarea')
+
     
-  
-  
+    const commentDescription = document.getElementById('floatingTextarea').value.trim();
+    console.log(commentDescription);
     const card = document.createElement('div');
     const cardHeader = document.createElement('div');
     const cardBody = document.createElement('div');
@@ -84,6 +90,7 @@ const submitComment = async (event) => {
       headers: { 'Content-Type': 'application/json' },
     });
     console.log(response)
+      
     if (response.ok) {
         document.location.replace(window.location.href);
     } else {
