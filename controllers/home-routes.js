@@ -42,7 +42,10 @@ router.get('/posts/:id', async (req, res) => {
                     attributes: ['username']
                 },
                 {
-                    model: Comments
+                    model: Comments,
+                    include:[{ model: User,
+                        attributes: ['username']
+                    },]
                 }
             ],
         });
@@ -88,28 +91,37 @@ router.get('/dashboard', async (req, res) => {
     }
 })
 
-router.get('/posts/:id', async (req, res) => {
-    try {
-        // finds all comments associated with a post
+// router.get('/posts/:id', async (req, res) => {
+//     try {
+//         // finds all comments associated with a post
         
-        const dbCommentData = await Post.findByPk(req.params.id, {
+//         const dbCommentData = await Post.findByPk(req.params.id, {
         
-            include: [{ model: Comments }, { model: User }]
-        });
-        if (!dbCommentData) {
-            res.status(404).json({ message: 'No comment found'});
-            return;
-        }
-        const commentData = dbCommentData.map((item) => 
-        item.get({ plain: true }));
-        console.log(commentData)
-        res.render('fullposts', {
-            commentData, loggedIn: req.session.loggedIn, userId: req.session.user_id
-        });
+//             include: [
+//                 {
+//                     model: Comments,
+//                     include:[{ model:User }]
+//                 },
+//                 // {
+//                 //     model: User
+//                 // }
+//             ]
+//         });
+//         if (!dbCommentData) {
+//             res.status(404).json({ message: 'No comment found'});
+//             return;
+//         }
+//         console.log(dbCommentData)
+//         const commentData = dbCommentData.map((item) => 
+//         item.get({ plain: true }));
+//         // console.log(commentData)
+//         res.render('fullposts', {
+//             commentData, loggedIn: req.session.loggedIn, userId: req.session.user_id
+//         });
 
-    } catch (err) {
-        console.log(err);
-        res.status(500).json(err);
-    }
-});
+//     } catch (err) {
+//         console.log(err);
+//         res.status(500).json(err);
+//     }
+// });
 module.exports = router;

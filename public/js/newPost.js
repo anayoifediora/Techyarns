@@ -43,6 +43,13 @@ const submitPost = async (event) => {
     }
   };
   
-  
+  const updateButton = document.getElementById('update-btn');
+
+  const openUpdateForm = () => {
+    const updateForm = document.querySelector('#update-post');
+    updateForm.setAttribute('style', "display:block; width: 600px; height:200px; margin-top:20px;");
+  }
+
+  updateButton.addEventListener('click', openUpdateForm);
   document.getElementById('post-submit-button').addEventListener('click', submitPost);
   

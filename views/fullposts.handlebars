@@ -28,7 +28,7 @@
       <div class="card-body">
         <blockquote class="blockquote mb-0">
           <p class="card-text">{{this.description}}</p>
-          <footer class="blockquote-footer">{{this.user_id}}</footer>
+          <footer class="blockquote-footer">{{this.user.username}}</footer>
         </blockquote>
       </div>
     </div>
@@ -80,8 +80,11 @@ const submitComment = async (event) => {
     cardBody.appendChild(cardBlockquote);
     cardBlockquote.appendChild(commentText, commentFooter)
 
+      let postId = window.location.href.split('/').pop();
+
     const data = {
       description: commentDescription,
+      post_id: postId,
     }
     
     const response = await fetch('/api/comments', {

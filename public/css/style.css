@@ -83,6 +83,9 @@ main {
     border: 1px, dashed, black;
     color:var(--primary);
 }
+#update-post {
+    display:none;
+}
 /* .contact {
     display:flex;
     align-items:center;
