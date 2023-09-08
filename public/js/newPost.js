@@ -1,3 +1,5 @@
+// const { post } = require("../../controllers/home-routes");
+
 const submitPost = async (event) => {
     event.preventDefault();
   
@@ -43,13 +45,56 @@ const submitPost = async (event) => {
     }
   };
   
-  const updateButton = document.getElementById('update-btn');
+  const updateButton = document.querySelector('.update-btn');
+  console.log(updateButton)
 
+  // This function opens the update form
   const openUpdateForm = () => {
     const updateForm = document.querySelector('#update-post');
     updateForm.setAttribute('style', "display:block; width: 600px; height:200px; margin-top:20px;");
   }
+  // This function closes the update form
+  const cancelUpdate = document.getElementById('cancel-update');
+  const closeUpdateForm = () => {
+    const updateForm = document.querySelector('#update-post');
+    updateForm.setAttribute('style', "display:none;");
+  };
 
-  updateButton.addEventListener('click', openUpdateForm);
-  document.getElementById('post-submit-button').addEventListener('click', submitPost);
+  const submitUpdate = async (event) => {
+      event.preventDefault();
+    const updateDescription = document.getElementById('post-description').innerHTML
+    const descriptionTextEl = document.getElementById('post-description')
+    
+    const postId = descriptionTextEl.getAttribute('data')
+    console.log(postId)
+    console.log(updateDescription)
+    
+
+    
+    const data = {
+      postId: postId,
+      description: updateDescription,
+    }
+    const response = await fetch('/api/posts/:id', {
+      method: 'PUT',
+      body: JSON.stringify(data),
+      headers: { 'Content-Type': 'application/json' },
+    });
+    console.log(response)
+    console.log(window.location)
+    if (response.ok) {
+        document.location.replace(window.location.href);
+    } else {
+      console.log('Error:', response.status);
+    }
+    
+  };
   
+  document.getElementById('post-submit-button').addEventListener('click', submitPost);
+  document.getElementById('submit-update').addEventListener('click', submitUpdate);
+  // for (let i = 0; i < updateButton.length; i++) {
+  //   updateButton[i].addEventListener('click', openUpdateForm);
+  // }
+  updateButton.addEventListener('click', openUpdateForm);
+
+  cancelUpdate.addEventListener('click', closeUpdateForm);

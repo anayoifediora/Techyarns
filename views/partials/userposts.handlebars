@@ -6,12 +6,18 @@
     <h5 class="card-title">{{title}}</h5>
     <p class="card-text">Author: {{user.username}}</p>
     <a href="/posts/{{id}}" class="btn btn-primary">Read more..</a>
-    <button class="btn btn-primary" id="update-btn">Update</button>
+    <button class="update-btn btn btn-primary">Update</button>
     <div id="update-post">
       {{!-- <input type="text" class="form-control" placeholder="Update your title here" id="post-title" value={{title}} > --}}
-      <textarea class="form-control" placeholder="Update your post here" id="post-description" style="width:800px; height:150px;">{{description}}</textarea>
-    <button class="btn btn-primary">Submit</button>
-    <button class="btn btn-primary">Cancel</button>
+      <textarea 
+      data="{{id}}"class="form-control" 
+      placeholder="Update your post here" 
+      id="post-description" 
+      style="width:800px; height:150px;"
+      >{{description}}         
+      </textarea>
+      <button class="btn btn-primary" id="submit-update">Submit</button>
+      <button class="btn btn-primary" id="cancel-update">Cancel</button>
     </div>
   </div>
 </div>

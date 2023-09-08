@@ -19,14 +19,14 @@
             
             <ul class="nav nav-pills">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/" style="background-color:var(--primary)">Home</a>
+                    <a class="nav-link" aria-current="page" href="/" style="background-color:var(--primary)">Home</a>
                 </li>
                 {{#if loggedIn}}
                 <li class="nav-item">
                     <a class="nav-link" href="/dashboard">Dashboard</a>
                 </li>
                 <li class="nav-item">
-                    <button class="btn btn-primary nav-link" id= "logout" style="background-color: white;">Logout</button>
+                    <button class="btn btn-primary nav-link" id= "logout">Logout</button>
                 </li>
                 {{else}}
                 <li class="nav-item">
