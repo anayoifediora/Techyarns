@@ -19,7 +19,7 @@
             
         </div>
     </div>
-    <div class="col">
+    <div class="col" onclick="openUpdateForm(event)">
         {{#each dashBoardData as |dashboard|}}
         {{> userposts}}
         {{/each}}
@@ -43,6 +43,16 @@
     
     newPostButton.addEventListener('click', openPostForm)
     cancelButton.addEventListener('click', closePostForm)
+    
+    function openUpdateForm(event) {
+        if(event.target.className === 'update-btn btn btn-primary') {
+            let updateForm = document.querySelector('#update-post');
+            updateForm = event.target.parentElement.querySelector('#update-post');
+            updateForm.setAttribute('style', "display:block; width: 600px; height:200px; margin-top:20px;")
+        
+    }
+    }
+
     
 
 </script>

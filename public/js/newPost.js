@@ -1,5 +1,7 @@
 // const { post } = require("../../controllers/home-routes");
 
+// const { update } = require("../../models/User");
+
 const submitPost = async (event) => {
     event.preventDefault();
   
@@ -45,14 +47,13 @@ const submitPost = async (event) => {
     }
   };
   
-  const updateButton = document.querySelector('.update-btn');
-  console.log(updateButton)
-
+  // let updateButton = document.querySelector('.update-btn');
+  
   // This function opens the update form
-  const openUpdateForm = () => {
-    const updateForm = document.querySelector('#update-post');
-    updateForm.setAttribute('style', "display:block; width: 600px; height:200px; margin-top:20px;");
-  }
+  // const openUpdateForm = () => {
+  //   const updateForm = document.querySelector('#update-post');
+  //   updateForm.setAttribute('style', "display:block; width: 600px; height:200px; margin-top:20px;");
+  // }
   // This function closes the update form
   const cancelUpdate = document.getElementById('cancel-update');
   const closeUpdateForm = () => {
@@ -89,9 +90,5 @@ const submitPost = async (event) => {
   
   document.getElementById('post-submit-button').addEventListener('click', submitPost);
   document.getElementById('submit-update').addEventListener('click', submitUpdate);
-  // for (let i = 0; i < updateButton.length; i++) {
-  //   updateButton[i].addEventListener('click', openUpdateForm);
-  // }
-  updateButton.addEventListener('click', openUpdateForm);
 
   cancelUpdate.addEventListener('click', closeUpdateForm);

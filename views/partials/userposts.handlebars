@@ -6,7 +6,7 @@
     <h5 class="card-title">{{title}}</h5>
     <p class="card-text">Author: {{user.username}}</p>
     <a href="/posts/{{id}}" class="btn btn-primary">Read more..</a>
-    <button class="update-btn btn btn-primary">Update</button>
+    <button class="update-btn btn btn-primary" data="{{id}}">Update</button>
     <div id="update-post">
       {{!-- <input type="text" class="form-control" placeholder="Update your title here" id="post-title" value={{title}} > --}}
       <textarea 
@@ -19,7 +19,18 @@
         {{description}}  
       </textarea>
       <button class="btn btn-primary" id="submit-update">Submit</button>
-      <button class="btn btn-primary" id="cancel-update">Cancel</button>
+      <button class="btn btn-primary" id="cancel-update" onclick="closeUpdateForm(event)">Cancel</button>
     </div>
   </div>
 </div>
+
+<script>
+  function closeUpdateForm(event) {
+        if(event.target.id === 'cancel-update') {
+            let updateForm = document.querySelector('#update-post');
+            updateForm = event.target.parentElement;
+            updateForm.setAttribute('style', "display:none;")
+        }
+    }
+
+</script>
