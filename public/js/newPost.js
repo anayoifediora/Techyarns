@@ -14,7 +14,7 @@ const submitPost = async (event) => {
     const cardText = document.createElement('p');
     const readMore = document.createElement('a');
     
-    const postContainer = document.querySelector('.row')
+    const postContainer = document.querySelector('.col')
     card.setAttribute('style', 'width:600px')
     cardHeader.setAttribute('class', 'card-header')
     cardTitle.setAttribute('class', 'card-title')
@@ -62,20 +62,17 @@ const submitPost = async (event) => {
 
   const submitUpdate = async (event) => {
       event.preventDefault();
-    const updateDescription = document.getElementById('post-description').innerHTML
+    const updateDescription = document.getElementById('post-description').value.trim()
     const descriptionTextEl = document.getElementById('post-description')
     
     const postId = descriptionTextEl.getAttribute('data')
-    console.log(postId)
-    console.log(updateDescription)
-    
-
     
     const data = {
       postId: postId,
       description: updateDescription,
     }
-    const response = await fetch('/api/posts/:id', {
+    console.log(data)
+    const response = await fetch(`/api/posts/${postId}`, {
       method: 'PUT',
       body: JSON.stringify(data),
       headers: { 'Content-Type': 'application/json' },

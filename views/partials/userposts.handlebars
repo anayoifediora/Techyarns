@@ -10,11 +10,13 @@
     <div id="update-post">
       {{!-- <input type="text" class="form-control" placeholder="Update your title here" id="post-title" value={{title}} > --}}
       <textarea 
-      data="{{id}}"class="form-control" 
-      placeholder="Update your post here" 
-      id="post-description" 
-      style="width:800px; height:150px;"
-      >{{description}}         
+        data="{{id}}"
+        class="form-control" 
+        placeholder="Update your post here" 
+        id="post-description" 
+        style="width:800px; height:150px;"
+      >
+        {{description}}  
       </textarea>
       <button class="btn btn-primary" id="submit-update">Submit</button>
       <button class="btn btn-primary" id="cancel-update">Cancel</button>
