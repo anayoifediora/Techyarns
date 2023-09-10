@@ -6,7 +6,7 @@ The objective of this project was to develop a Tech Blog for Tech enthusiasts to
 
 The project was developed using *Express.JS* for routing and *MySQL* for database structure. It also incorporated code libraries such as *sequelize*, *express.handlebars*, *node.js* e.t.c. The backend was tested using *Insomnia*. Working on this project exposed me to several new concepts especially the significance of MySQL.
 ## Link to Webpage
-[A link to the webpage can be found here] (https://glacial-plateau-12888-cbb958ef2bae.herokuapp.com/)
+[A link to the webpage can be found here](https://still-ocean-21890-aa6ab0625c16.herokuapp.com/)
 ## Table of Contents
 
 - [Usage](#usage)
