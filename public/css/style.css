@@ -100,22 +100,7 @@ main {
 #update-post {
     display:none;
 }
-/* .contact {
-    display:flex;
-    align-items:center;
-    background-color: var(--primary);
-}
-.contact-details {
-    display:flex;
-    flex-wrap:nowrap;
-    justify-content:space-between;
-    color: white
-}
-    
-.contact h2 {
-    padding:30px;
-    color: white;
-} */
+
 
 @media screen and (max-width: 768px) {
     .header {
@@ -128,6 +113,22 @@ main {
     .nav-link {
         display:flex;   
         flex-direction: row;
+    }
+    * {
+        font-size: 15px;
+    }
+    main {
+        width:100%;
+    }
+
+    .login-form, .signup-form {
+        width:100%;
+    }
+    #post-form-title, #post-form-description {
+        font-size: 15px;
+    }
+    .card {
+        width:100%;
     }
     
 }
@@ -142,5 +143,6 @@ main {
     }
     .card {
         width:100%;
+        
     }
 }

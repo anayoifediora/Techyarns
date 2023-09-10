@@ -1,5 +1,5 @@
 
-<div class="col">
+<div class="col-lg-12 col-md-12 col-12">
     
 
     <div class="col" style="display:flex; flex-direction:column; border-radius:5px;" >
@@ -19,7 +19,7 @@
             
         </div>
     </div>
-    <div class="col" onclick="openUpdateForm(event)">
+    <div class="col">
         {{#each dashBoardData as |dashboard|}}
         {{> userposts}}
         {{/each}}
@@ -28,7 +28,7 @@
 <script>
     const newPostButton = document.getElementById('newpost');
     const cancelButton = document.getElementById('post-cancel-button');
-    const updatePostButton = document.getElementById('update-btn');
+
 
     const openPostForm = () => {
         const postForm = document.querySelector('.post-form');
@@ -44,14 +44,7 @@
     newPostButton.addEventListener('click', openPostForm)
     cancelButton.addEventListener('click', closePostForm)
     
-    function openUpdateForm(event) {
-        if(event.target.className === 'update-btn btn btn-primary') {
-            let updateForm = document.querySelector('#update-post');
-            updateForm = event.target.parentElement.querySelector('#update-post');
-            updateForm.setAttribute('style', "display:block; width: 600px; height:200px; margin-top:20px;")
-        
-    }
-    }
+    
 
     
 

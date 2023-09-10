@@ -1,13 +1,11 @@
 const router = require('express').Router();
 const { Comments, Post, User, UserPost } = require('../../models');
 
-
-
-
+// GET all posts for dashboard
 router.get('/', async (req, res) => {
     try {
         const dashBoardData = await Post.findAll({
-            where: {user_id: 2},
+            where: {user_id: req.session.user_id},
             
         });
 

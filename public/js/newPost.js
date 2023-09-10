@@ -45,50 +45,52 @@ const submitPost = async (event) => {
     } else {
       console.log('Error:', response.status);
     }
-  };
-  
-  // let updateButton = document.querySelector('.update-btn');
-  
-  // This function opens the update form
-  // const openUpdateForm = () => {
-  //   const updateForm = document.querySelector('#update-post');
-  //   updateForm.setAttribute('style', "display:block; width: 600px; height:200px; margin-top:20px;");
-  // }
-  // This function closes the update form
-  const cancelUpdate = document.getElementById('cancel-update');
-  const closeUpdateForm = () => {
-    const updateForm = document.querySelector('#update-post');
-    updateForm.setAttribute('style', "display:none;");
-  };
+};
 
-  const submitUpdate = async (event) => {
-      event.preventDefault();
-    const updateDescription = document.getElementById('post-description').value.trim()
-    const descriptionTextEl = document.getElementById('post-description')
-    
-    const postId = descriptionTextEl.getAttribute('data')
-    
-    const data = {
-      postId: postId,
-      description: updateDescription,
-    }
-    console.log(data)
-    const response = await fetch(`/api/posts/${postId}`, {
-      method: 'PUT',
-      body: JSON.stringify(data),
-      headers: { 'Content-Type': 'application/json' },
-    });
-    console.log(response)
-    console.log(window.location)
-    if (response.ok) {
-        document.location.replace(window.location.href);
-    } else {
-      console.log('Error:', response.status);
-    }
-    
-  };
+function openUpdateForm(event) {
+  if(event.target.className === 'update-btn btn btn-primary') {
+      let updateForm = document.querySelector('#update-post');
+      updateForm = event.target.parentElement.querySelector('#update-post');
+      updateForm.setAttribute('style', "display:block; width: 600px; height:200px; margin-top:20px;")
+  
+}
+}
+function closeUpdateForm(event) {
+  if(event.target.id === 'cancel-update') {
+      let updateForm = document.querySelector('#update-post');
+      updateForm = event.target.parentElement;
+      updateForm.setAttribute('style', "display:none;")
+  }
+}
+
+const submitUpdate = async (event) => {
+if (event.target.id === 'submit-update') {
+  event.preventDefault();
+let updateDescription = document.getElementById('post-description').value.trim()
+updateDescription = event.target.parentElement.querySelector('#post-description').value.trim()
+const descriptionTextEl = document.getElementById('post-description')
+
+const postId = descriptionTextEl.getAttribute('data')
+
+const data = {
+  postId: postId,
+  description: updateDescription,
+}
+console.log(data)
+const response = await fetch(`/api/posts/${postId}`, {
+  method: 'PUT',
+  body: JSON.stringify(data),
+  headers: { 'Content-Type': 'application/json' },
+});
+console.log(response)
+console.log(window.location)
+if (response.ok) {
+    document.location.replace(window.location.href);
+} else {
+  console.log('Error:', response.status);
+}
+}
+};
   
   document.getElementById('post-submit-button').addEventListener('click', submitPost);
-  document.getElementById('submit-update').addEventListener('click', submitUpdate);
-
-  cancelUpdate.addEventListener('click', closeUpdateForm);
+  
